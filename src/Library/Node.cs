@@ -4,19 +4,13 @@ using System;
 
 namespace Library
 {
-    public class Node
+    public class Node : Visitor
     {
         private int number;
 
         private List<Node> children = new List<Node>();
-
-        public int Number {
-            get
-            {
-                return this.number;
-            }
-        }
-
+        private Person person;
+        
         public ReadOnlyCollection<Node> Children { 
             get
             {
@@ -24,15 +18,35 @@ namespace Library
             }
         }
 
-        public Node(int number)
+        public Node(string name, int edad)
         {
-            this.number = number;
+            this.person = new Person(name, edad);
         }
 
         public void AddChildren(Node n)
         {
             this.children.Add(n);
         }
+        public void Accept(Visitor visitor)
+        {
+             visitor.Visit(this);
+        }
         
+        public override void Visit(Node node)
+        {
+    
+            foreach (Node item in this.children)
+            {
+                item.person.Accept(this);
+            }
+        }
+
+        public override int SumaEdades()
+        {
+            
+
+        }
+
+               
     }
 }

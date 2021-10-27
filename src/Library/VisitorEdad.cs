@@ -1,8 +1,11 @@
 using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Library
 {
-    public class VisitorEdad : Visitor 
+    public class VisitorEdad : IVisitor<Node<Person>>, IVisitor<Person>
     {
         private int sumaEdades = 0;
         public int SumaEdades
@@ -13,19 +16,20 @@ namespace Library
             }
         }
        
-
-        public override void Visit(Node node)
+        protected StringBuilder ContentBuilder { get; } = new StringBuilder();
+        public void Visit(Node<Person> node)
         {
-            foreach (Node item in node.Children)
+            node.Content.Accept(this);
+
+            foreach (Node<Person> item in node.Children)
             {
                 item.Accept(this);
-                item.person.Accept(this);
             }
             
-           // this.ContentBuilder.Append($"Total: ${sale.Total}");
+           
 
         }
-        public override void Visit(Person person)
+        public  void Visit(Person person)
         {
            this.sumaEdades += person.Edad;
         }

@@ -3,7 +3,7 @@ using System;
 namespace Library
 {
     
-    public class VisitorLongestName : Visitor
+    public class VisitorLongestName : IVisitor<Node<Person>>, IVisitor<Person>
     {
         private string longestName = "";
         public string LongestName
@@ -13,15 +13,16 @@ namespace Library
                 return this.longestName;
             }
         }
-        public override void Visit(Node node)
+        public void Visit(Node<Person> node)
         {
-            foreach(Node item in node.Children)
+            node.Content.Accept(this);
+            foreach(Node<Person> item in node.Children)
             {
                 item.Accept(this);
             }
         }
 
-        public override void Visit(Person person)
+        public  void Visit(Person person)
         {
             if(this.LongestName.Length < person.Name.Length)
             {

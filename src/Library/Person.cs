@@ -16,7 +16,7 @@ namespace Library
         public string Name{get;}
         public int Edad{get;}
 
-        public void Accept(Visitor visitor)
+        public void Accept(IVisitor<Person> visitor)
         {
              visitor.Visit(this);
         }

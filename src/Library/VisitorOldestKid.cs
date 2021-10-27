@@ -2,7 +2,7 @@ using System;
 
 namespace Library
 {
-    public class VisitorOldestKid : Visitor
+    public class VisitorOldestKid : IVisitor<Node<Person>>, IVisitor<Person>
     {
         private int oldestKid = 0;
         public int OldestKid
@@ -12,15 +12,16 @@ namespace Library
                 return this.oldestKid;
             }
         }
-        public override void Visit(Node node)
+        public void Visit(Node<Person> node)
         {
-           foreach(Node item in node.Children)
+            node.Content.Accept(this);
+           foreach(Node<Person> item in node.Children)
            {
                item.Accept(this);
            }
         }
 
-        public override void Visit(Person person)
+        public void Visit(Person person)
         {
             if(this.OldestKid < person.Edad)
             {

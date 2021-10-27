@@ -4,7 +4,7 @@ using System;
 
 namespace Library
 {
-    public class Node : Visitor
+    public class Node 
     {
         private int number;
 
@@ -32,20 +32,7 @@ namespace Library
              visitor.Visit(this);
         }
         
-        public override void Visit(Node node)
-        {
-    
-            foreach (Node item in this.children)
-            {
-                item.person.Accept(this);
-            }
-        }
-
-        public override int SumaEdades()
-        {
-            
-
-        }
+        
 
                
     }

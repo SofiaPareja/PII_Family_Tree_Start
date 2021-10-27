@@ -25,6 +25,14 @@ namespace Program
             n3.AddChildren(n7);
 
             // visitar el árbol aquí
+            // Create visitor objects
+            VisitorEdad v1 = new VisitorEdad();
+            // Structure accepting visitors
+            n1.Accept(v1);
+            Console.WriteLine($"La suma de las edades es:{v1.SumaEdades}");
+            
         }
     }
+            
+        
 }
